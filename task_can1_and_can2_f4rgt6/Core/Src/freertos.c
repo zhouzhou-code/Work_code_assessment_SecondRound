@@ -140,7 +140,8 @@ void StartDefaultTask(void *argument)
         can_test(&hcan2,2);	//can2 test_data2
         osDelay(5000);	
         can_test(&hcan2,3);	//can2 test_data3
-        osDelay(5000);	
+        osDelay(5000);
+        uint8_t test_git; //测试git	
         count_test++;
 		}
     	  						
