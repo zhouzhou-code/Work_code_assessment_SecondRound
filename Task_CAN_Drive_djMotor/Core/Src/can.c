@@ -54,7 +54,36 @@ void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+/*---------------------------------------CAN1初始化过滤器Start-----------------------------------------------------*/
+	
+	//配置为接收所有报文
 
+  // 过滤器结构体
+  CAN_FilterTypeDef  sFilterConfig;
+	
+	sFilterConfig.SlaveStartFilterBank = 0;           // 分配滤波器资源()
+	sFilterConfig.FilterBank = 0;                      // 过滤器序号
+	
+	sFilterConfig.FilterIdHigh = 0x0000;               // 
+	sFilterConfig.FilterIdLow = 0x0000;                // 
+	sFilterConfig.FilterMaskIdHigh = 0x0000;           // 
+	sFilterConfig.FilterMaskIdLow = 0x0000;            // 
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; // 32位掩码
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  // 掩码模式
+	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; // 给邮箱0配置的过滤器
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE ;
+	
+	// 配置并自检
+	if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+				
+	/*---------------------------------------CAN1初始化过滤器End-----------------------------------------------------*/
+	//__HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
+	
+	HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
+   HAL_CAN_Start(&hcan1);         //开启can1
   /* USER CODE END CAN1_Init 2 */
 
 }

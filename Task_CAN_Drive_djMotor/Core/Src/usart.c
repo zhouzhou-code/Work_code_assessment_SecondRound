@@ -115,7 +115,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+int fputc(int ch, FILE *f)
+{
+	__HAL_UNLOCK(&huart1);//解锁串口
+  while((&huart1)->gState != HAL_UART_STATE_READY);//等待串口空闲再发送
+		
+  HAL_UART_Transmit(&huart1,(uint8_t*)&ch,1,20);
+  return ch;
 
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
