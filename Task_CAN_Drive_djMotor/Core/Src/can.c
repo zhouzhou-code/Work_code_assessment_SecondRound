@@ -21,6 +21,13 @@
 #include "can.h"
 
 /* USER CODE BEGIN 0 */
+#include "usart.h"
+#include "stdio.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "semphr.h"
+
 
 /* USER CODE END 0 */
 
@@ -150,7 +157,30 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
+void send_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Tx)
+{
+	  uint32_t TxMailbox=CAN_TX_MAILBOX0;
+	 
+    if (HAL_CAN_AddTxMessage(hcan, &(CAN_Message_Tx->TxHeader), CAN_Message_Tx->TxDataBuf, &TxMailbox) == HAL_OK) 
+		{					
+			//SAFE_PRINTF("CAN message sent.\r\n");//包含了
+    } 
+		else 
+		{
+      SAFE_PRINTF("Failed to send CAN message.\r\n");//串口提示消息发出
+    }	
+}
 
+uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Rx) 
+{       
+
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &CAN_Message_Rx->RxHeader, CAN_Message_Rx->RxDataBuf) == HAL_OK)
+		{
+			CAN_Message_Rx->RxDataLength=CAN_Message_Rx->RxHeader.DLC;   //接受长度成员赋值为DLC
+      //printf("CAN message received.\r\n");//串口提示消息接收到   	
+    }		
+		return 	CAN_Message_Rx->RxDataLength;	
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

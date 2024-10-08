@@ -34,13 +34,22 @@ extern "C" {
 extern CAN_HandleTypeDef hcan1;
 
 /* USER CODE BEGIN Private defines */
+typedef struct {
+    CAN_RxHeaderTypeDef RxHeader;    // 接收头（包含ID，数据长度等信息）
+	  uint8_t RxDataBuf[8];            //数据缓冲区，设置其为最大长度8，实际接收的数据长度由DLC确定
+	  uint8_t RxDataLength;           // 接收数据长度(可以去掉，从头中读取数据,为了更直观的显示接收到的字节数，选择保留这个成员)
 
+    CAN_TxHeaderTypeDef TxHeader;      // 发送头（包含ID，数据长度等信息）
+    uint8_t TxDataBuf[8];              // 数据缓冲区，设置其为最大长度8，实际发送的数据长度由DLC确定
+    
+} CAN_Message_t;                     //使用结构体管理头和数据
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void send_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Tx);
+uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Rx);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -28,7 +28,13 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#define SAFE_PRINTF(fmt, ...) \
+    do { \
+        taskENTER_CRITICAL(); \
+        printf(fmt, ##__VA_ARGS__); \
+        taskEXIT_CRITICAL(); \
+    } while (0)
+    
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart1;

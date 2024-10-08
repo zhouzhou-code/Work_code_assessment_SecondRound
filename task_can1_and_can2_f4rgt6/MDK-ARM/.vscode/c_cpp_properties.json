@@ -3,20 +3,20 @@
         {
             "name": "task_can1 and can2 f4rgt6",
             "includePath": [
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Core\\Inc",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\include",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\CMSIS_RTOS_V2",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\RVDS\\ARM_CM4F",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Drivers\\CMSIS\\Include",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Core\\Inc",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\include",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\CMSIS_RTOS_V2",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\RVDS\\ARM_CM4F",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Drivers\\CMSIS\\Include",
                 "D:\\software\\Keil\\core\\ARM\\ARMCC\\include",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\MDK-ARM",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Core\\Src",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Src",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source",
-                "d:\\mcu_data\\Cube_Project\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\MDK-ARM",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Core\\Src",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Drivers\\STM32F4xx_HAL_Driver\\Src",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source",
+                "d:\\mcu_data\\Cube_Project\\Work_Code\\Second_round_assessment\\task_can1_and_can2_f4rgt6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
             ],
             "defines": [
                 "USE_HAL_DRIVER",
