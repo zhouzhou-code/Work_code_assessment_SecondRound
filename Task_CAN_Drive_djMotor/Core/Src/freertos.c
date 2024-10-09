@@ -123,8 +123,8 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    can_test(&hcan1,1);
-    osDelay(100000);
+    //Can_Drive_djMotor();//控制一次电机
+    //osDelay(portMAX_DELAY);
   }
   /* USER CODE END StartDefaultTask */
 }

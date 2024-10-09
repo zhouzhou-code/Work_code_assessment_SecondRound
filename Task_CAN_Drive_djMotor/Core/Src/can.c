@@ -181,7 +181,26 @@ uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_R
     }		
 		return 	CAN_Message_Rx->RxDataLength;	
 }
-
+//先封装收发固定为ID:1的电机
+void Can_Drive_djMotor(void)
+{
+	  int16_t MotorSpeed=20000; //-25000~0~+25000
+	  // 获取高 8 位和低 8 位
+    uint8_t highByte = (MotorSpeed >> 8) & 0xFF; // 右移 8 位并取低 8 位
+    uint8_t lowByte = MotorSpeed & 0xFF;         // 直接取低 8 位  
+    CAN_Message_t CAN_Message_Tx={
+		
+			.TxHeader = {
+			.StdId = 0x1ff,           // 标准ID
+			.IDE = CAN_ID_STD,        // 设置为标准 ID
+			.RTR = CAN_RTR_DATA,      // 数据帧
+			.DLC = 8                 // 发送数据长度
+				},
+      .TxDataBuf = {highByte,lowByte,0,0,0,0,0,0 }, // 初始化发送数据缓冲区	
+		};
+		
+		send_can_message(&hcan1,&CAN_Message_Tx); 
+}
 void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN发，其余收
 {
 	//test data 1 标准ID 2字节数据帧

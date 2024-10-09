@@ -48,6 +48,7 @@ typedef struct {
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+void Can_Drive_djMotor(void);//发送数据控制电机(ID为1)
 void send_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Tx);
 uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Rx);
 /* USER CODE END Prototypes */
