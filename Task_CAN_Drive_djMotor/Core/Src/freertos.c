@@ -26,6 +26,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "can.h"
+#include "usart.h"
+#include "stdio.h"
+#include "queue.h"
+#include "semphr.h"
 
 /* USER CODE END Includes */
 
@@ -58,7 +63,7 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-
+void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -118,7 +123,8 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    can_test(&hcan1,1);
+    osDelay(100000);
   }
   /* USER CODE END StartDefaultTask */
 }

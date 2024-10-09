@@ -46,8 +46,8 @@ void MX_CAN1_Init(void)
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
   hcan1.Init.Prescaler = 2;
-  //hcan1.Init.Mode = CAN_MODE_NORMAL;
-  hcan1.Init.Mode =CAN_MODE_LOOPBACK;//换用LoopBack测试
+  //hcan1.Init.Mode = CAN_MODE_NORMAL; 
+  hcan1.Init.Mode =CAN_MODE_LOOPBACK;//回环模式测试
   hcan1.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan1.Init.TimeSeg1 = CAN_BS1_15TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_5TQ;
@@ -181,6 +181,63 @@ uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_R
       //printf("CAN message received.\r\n");//串口提示消息接收到   	
     }		
 		return 	CAN_Message_Rx->RxDataLength;	
+}
+
+void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN发，其余收
+{
+	//test data 1 标准ID 2字节数据帧
+	CAN_Message_t CAN_Message_Tx1={
+		
+			.TxHeader = {
+			.StdId = 0x120,           // 示例标准ID
+			.IDE = CAN_ID_STD,        // 设置为标准 ID
+			.RTR = CAN_RTR_DATA,      // 数据帧
+			.DLC = 2                  // 发送数据长度
+				},
+      .TxDataBuf = {0x01, 0x02}, // 初始化发送数据缓冲区	
+		};
+  //test data 2 拓展ID 4字节数据帧 
+	CAN_Message_t CAN_Message_Tx2={
+	
+		.TxHeader = {
+		.ExtId = 0x1fffffff,   // 拓展ID
+		.IDE = CAN_ID_EXT,     // 设置为拓展ID
+		.RTR = CAN_RTR_DATA,   // 数据帧
+		.DLC = 4               // 发送数据长度
+			},
+		.TxDataBuf = {0xAA, 0xBB,0xCC,0xDD}, // 初始化发送数据缓冲区	
+	};
+	
+	//test data 3 标准ID 遥控帧
+	CAN_Message_t CAN_Message_Tx3={
+	
+		.TxHeader = {
+		.StdId = 0x00f,        // 标准ID
+		.IDE = CAN_ID_STD,     // 设置为拓展ID
+		.RTR = CAN_RTR_REMOTE, // 遥控帧
+		.DLC = 0               // 发送数据长度
+			},
+		.TxDataBuf = {0}, // 初始化发送数据缓冲区	
+	};
+	
+	 if(hcan==&hcan1)
+		 SAFE_PRINTF("CAN1 发送\r\n");
+	 else
+		 SAFE_PRINTF("CAN2 发送\r\n");
+	 
+   CAN_Message_t CAN_Message_Rx;
+	 if(data_testx==1)
+	   send_can_message(hcan,&CAN_Message_Tx1);  //can发送test1
+	 else if(data_testx==2)
+		 send_can_message(hcan,&CAN_Message_Tx2);  //can发送test2
+	 else if(data_testx==3)
+		 send_can_message(hcan,&CAN_Message_Tx3);  //can发送test2
+		 
+}
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  printf("进入回调函数");    
+
 }
 /* USER CODE END 1 */
 
