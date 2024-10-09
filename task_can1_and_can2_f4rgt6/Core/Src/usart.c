@@ -21,7 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-#include "stdio.h"
+#include <stdio.h>
 
 /* USER CODE END 0 */
 
