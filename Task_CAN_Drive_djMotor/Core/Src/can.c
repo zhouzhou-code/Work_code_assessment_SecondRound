@@ -157,54 +157,36 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
-void send_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Tx)
+void SendCanMessage(CAN_HandleTypeDef* hcan,CanMessage_t* canMessageTx)
 {
 	  uint32_t TxMailbox=CAN_TX_MAILBOX0;
 	 
-    if (HAL_CAN_AddTxMessage(hcan, &(CAN_Message_Tx->TxHeader), CAN_Message_Tx->TxDataBuf, &TxMailbox) == HAL_OK) 
+    if (HAL_CAN_AddTxMessage(hcan, &(canMessageTx->TxHeader), canMessageTx->TxDataBuf, &TxMailbox) == HAL_OK) 
 		{					
 			//SAFE_PRINTF("CAN message sent.\r\n");//包含了
     } 
 		else 
 		{
-      SAFE_PRINTF("Failed to send CAN message.\r\n");//串口提示消息发出
+      //SAFE_PRINTF("Failed to send CAN message.\r\n");//串口提示消息发出 
     }	
 }
 
-uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Rx) 
+uint8_t ReceiveCanMessage(CAN_HandleTypeDef* hcan,CanMessage_t* canMessageRx) 
 {       
 
-    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &CAN_Message_Rx->RxHeader, CAN_Message_Rx->RxDataBuf) == HAL_OK)
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &canMessageRx->RxHeader, canMessageRx->RxDataBuf) == HAL_OK)
 		{
-			CAN_Message_Rx->RxDataLength=CAN_Message_Rx->RxHeader.DLC;   //接受长度成员赋值为DLC
+			canMessageRx->RxDataLength=canMessageRx->RxHeader.DLC;   //接受长度成员赋值为DLC
       //printf("CAN message received.\r\n");//串口提示消息接收到   	
     }		
-		return 	CAN_Message_Rx->RxDataLength;	
+		return 	canMessageRx->RxDataLength;	
 }
-//先封装收发固定为ID:1的电机
-void Can_Drive_djMotor(void)
-{
-	  int16_t MotorSpeed=20000; //-25000~0~+25000
-	  // 获取高 8 位和低 8 位
-    uint8_t highByte = (MotorSpeed >> 8) & 0xFF; // 右移 8 位并取低 8 位
-    uint8_t lowByte = MotorSpeed & 0xFF;         // 直接取低 8 位  
-    CAN_Message_t CAN_Message_Tx={
-		
-			.TxHeader = {
-			.StdId = 0x1ff,           // 标准ID
-			.IDE = CAN_ID_STD,        // 设置为标准 ID
-			.RTR = CAN_RTR_DATA,      // 数据帧
-			.DLC = 8                 // 发送数据长度
-				},
-      .TxDataBuf = {highByte,lowByte,0,0,0,0,0,0 }, // 初始化发送数据缓冲区	
-		};
-		
-		send_can_message(&hcan1,&CAN_Message_Tx); 
-}
+
+
 void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN发，其余收
 {
 	//test data 1 标准ID 2字节数据帧
-	CAN_Message_t CAN_Message_Tx1={
+	CanMessage_t canMessageTx1={
 		
 			.TxHeader = {
 			.StdId = 0x120,           // 示例标准ID
@@ -215,7 +197,7 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
       .TxDataBuf = {0x01, 0x02}, // 初始化发送数据缓冲区	
 		};
   //test data 2 拓展ID 4字节数据帧 
-	CAN_Message_t CAN_Message_Tx2={
+	CanMessage_t canMessageTx2={
 	
 		.TxHeader = {
 		.ExtId = 0x1fffffff,   // 拓展ID
@@ -227,7 +209,7 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
 	};
 	
 	//test data 3 标准ID 遥控帧
-	CAN_Message_t CAN_Message_Tx3={
+	CanMessage_t canMessageTx3={
 	
 		.TxHeader = {
 		.StdId = 0x00f,        // 标准ID
@@ -243,13 +225,12 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
 	 else
 		 SAFE_PRINTF("CAN2 发送\r\n");
 	 
-   CAN_Message_t CAN_Message_Rx;
 	 if(data_testx==1)
-	   send_can_message(hcan,&CAN_Message_Tx1);  //can发送test1
+	   SendCanMessage(hcan,&canMessageTx1);  //can发送test1
 	 else if(data_testx==2)
-		 send_can_message(hcan,&CAN_Message_Tx2);  //can发送test2
+		 SendCanMessage(hcan,&canMessageTx2);  //can发送test2
 	 else if(data_testx==3)
-		 send_can_message(hcan,&CAN_Message_Tx3);  //can发送test2
+		 SendCanMessage(hcan,&canMessageTx3);  //can发送test2
 		 
 }
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)

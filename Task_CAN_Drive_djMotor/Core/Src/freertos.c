@@ -31,7 +31,7 @@
 #include "stdio.h"
 #include "queue.h"
 #include "semphr.h"
-
+#include "djMotor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -123,8 +123,7 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    //Can_Drive_djMotor();//控制一次电机
-    //osDelay(portMAX_DELAY);
+
   }
   /* USER CODE END StartDefaultTask */
 }

@@ -42,15 +42,15 @@ typedef struct {
     CAN_TxHeaderTypeDef TxHeader;      // 发送头（包含ID，数据长度等信息）
     uint8_t TxDataBuf[8];              // 数据缓冲区，设置其为最大长度8，实际发送的数据长度由DLC确定
     
-} CAN_Message_t;                     //使用结构体管理头和数据
+} CanMessage_t;                     //使用结构体管理头和数据
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void Can_Drive_djMotor(void);//发送数据控制电机(ID为1)
-void send_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Tx);
-uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_Rx);
+
+void SendCanMessage(CAN_HandleTypeDef* hcan,CanMessage_t* canMessageTx);
+uint8_t ReceiveCanMessage(CAN_HandleTypeDef* hcan,CanMessage_t* canMessageRx);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
