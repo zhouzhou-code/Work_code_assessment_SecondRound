@@ -46,8 +46,7 @@ void MX_CAN1_Init(void)
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
   hcan1.Init.Prescaler = 2;
-  //hcan1.Init.Mode = CAN_MODE_NORMAL; 
-  hcan1.Init.Mode =CAN_MODE_LOOPBACK;//回环模式测试
+  hcan1.Init.Mode = CAN_MODE_NORMAL; 
   hcan1.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan1.Init.TimeSeg1 = CAN_BS1_15TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_5TQ;
@@ -235,9 +234,8 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
 		 
 }
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
-  printf("进入回调函数");    
-
+{    
+  
 }
 /* USER CODE END 1 */
 
