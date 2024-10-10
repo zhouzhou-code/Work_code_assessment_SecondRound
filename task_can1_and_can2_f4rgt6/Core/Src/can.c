@@ -319,7 +319,7 @@ uint8_t receive_can_message(CAN_HandleTypeDef* hcan,CAN_Message_t* CAN_Message_R
 		return 	CAN_Message_Rx->RxDataLength;	
 }
 
-
+//在中断里使用了很多printf是很耗时的操作！！！这是很错误的示范，尤其是在接收频率很高的情况下！！！！
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
 	#if 1

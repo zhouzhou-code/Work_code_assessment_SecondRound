@@ -152,6 +152,7 @@ void StartTask02(void *argument)
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
 	int cnt=0;
+	
   for(;;)
   {
 			DriveDjMotor(&hcan1,1,100);
