@@ -531,11 +531,6 @@
           <GroupName>Drivers/CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>djMotor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\djMotor\djMotor.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32f4xx.c</FilePath>
@@ -599,6 +594,13 @@
         </Group>
         <Group>
           <GroupName>djMotor</GroupName>
+          <Files>
+            <File>
+              <FileName>djMotor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\djMotor\djMotor.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
