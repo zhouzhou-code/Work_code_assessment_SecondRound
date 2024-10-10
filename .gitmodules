@@ -1,3 +1,6 @@
 [submodule "Task_Osciloscope"]
 	path = Task_Osciloscope
 	url = ./d/mcu_data/Cube_Project/Work_Code/Second_round_assessment/Task_Osciloscope
+[submodule "Task_CAN_Drive_djMotor"]
+	path = Task_CAN_Drive_djMotor
+	url = D:/mcu_data/Cube_Project/Work_Code/Second_round_assessment/Task_CAN_Drive_djMotor
