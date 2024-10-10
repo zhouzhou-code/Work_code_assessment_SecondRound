@@ -5,7 +5,7 @@
 * @brief : 通过CAN驱动Dj电机
 * @param1: 通过哪个CAN发送控制电机的报文
 * @param2: 电机ID 参数可以是下面的几个 @arg MotorId_t
-* @param3: 电机转动的角度，范围在-360 ~ +360
+* @param3: 电机转动
 */
 
 void DriveDjMotor(CAN_HandleTypeDef* hcan,MotorId_t motorId,double angle)

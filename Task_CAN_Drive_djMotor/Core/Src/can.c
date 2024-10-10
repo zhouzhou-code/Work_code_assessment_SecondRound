@@ -47,6 +47,7 @@ void MX_CAN1_Init(void)
   hcan1.Instance = CAN1;
   hcan1.Init.Prescaler = 2;
   hcan1.Init.Mode = CAN_MODE_NORMAL;
+	//hcan1.Init.Mode = CAN_MODE_LOOPBACK;
   hcan1.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan1.Init.TimeSeg1 = CAN_BS1_15TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_5TQ;
@@ -89,7 +90,7 @@ void MX_CAN1_Init(void)
 	/*---------------------------------------CAN1初始化过滤器End-----------------------------------------------------*/
 	//__HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
 	
-	//HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
+	 HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
    HAL_CAN_Start(&hcan1);         //开启can1
   /* USER CODE END CAN1_Init 2 */
 
@@ -233,9 +234,18 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
 		 SendCanMessage(hcan,&canMessageTx3);  //can发送test2
 		 
 }
+
+//不要在中断里使用很耗时的操作，比如printf!!!!
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {    
-  
+	uint16_t Id=0;
+	CanMessage_t CanMessage;
+  ReceiveCanMessage(hcan,&CanMessage);
+	
+	Id=CanMessage.RxHeader.StdId;
+	
+	//printf("ID=%x\r\n",Id);
+	
 }
 /* USER CODE END 1 */
 

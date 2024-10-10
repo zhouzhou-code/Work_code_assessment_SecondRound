@@ -154,12 +154,8 @@ void StartTask02(void *argument)
 	int cnt=0;
   for(;;)
   {
-
 			DriveDjMotor(&hcan1,1,100);
-
-		
-//	  for(int i=0;i<360;i++)
-
+		  vTaskDelay(pdMS_TO_TICKS(1));
   }
   /* USER CODE END StartTask02 */
 }
