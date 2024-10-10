@@ -1,0 +1,3 @@
+[submodule "Task_Osciloscope"]
+	path = Task_Osciloscope
+	url = ./d/mcu_data/Cube_Project/Work_Code/Second_round_assessment/Task_Osciloscope
