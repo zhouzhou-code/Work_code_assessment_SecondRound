@@ -88,9 +88,9 @@ void MX_CAN1_Init(void)
   }
 				
 	/*---------------------------------------CAN1初始化过滤器End-----------------------------------------------------*/
-	//__HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
+	__HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
 	
-	 HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
+	 //HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);//使能can1接收中断
    HAL_CAN_Start(&hcan1);         //开启can1
   /* USER CODE END CAN1_Init 2 */
 
@@ -235,16 +235,22 @@ void can_test(CAN_HandleTypeDef* hcan,uint8_t data_testx)    //测试样例 CAN�
 		 
 }
 
+
 //不要在中断里使用很耗时的操作，比如printf!!!!
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {    
-	uint16_t Id=0;
-	CanMessage_t CanMessage;
-  ReceiveCanMessage(hcan,&CanMessage);
+   volatile uint16_t Id,angleVal,speedVal,topqueVal;  //用volatile修饰的变量的可以在debug窗口查看
+	 volatile uint8_t  temperVal;
 	
-	Id=CanMessage.RxHeader.StdId;
+	 CanMessage_t canMessageRx;
+	 ReceiveCanMessage(hcan,&canMessageRx);
 	
-	//printf("ID=%x\r\n",Id);
+	 Id=canMessageRx.RxHeader.StdId-516;  //516=0x204
+	 angleVal=((canMessageRx.RxDataBuf[0]<<8) | canMessageRx.RxDataBuf[1]) ;     //角度值0`8191
+   speedVal=((canMessageRx.RxDataBuf[2]<<8) | canMessageRx.RxDataBuf[3]) ;     //转速单位rpm
+	 topqueVal=((canMessageRx.RxDataBuf[4]<<8) | canMessageRx.RxDataBuf[5]) ;    //转矩
+	 temperVal=canMessageRx.RxDataBuf[6];                                        //温度
+	
 	
 }
 /* USER CODE END 1 */
