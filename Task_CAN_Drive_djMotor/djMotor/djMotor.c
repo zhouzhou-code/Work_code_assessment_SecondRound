@@ -5,16 +5,12 @@
 * @brief : 通过CAN驱动Dj电机
 * @param1: 通过哪个CAN发送控制电机的报文
 * @param2: 电机ID 参数可以是下面的几个 @arg MotorId_t
-* @param3: 电机转动
+* @param3: 电机转动电压 -25000~25000
 */
 
-void DriveDjMotor(CAN_HandleTypeDef* hcan,MotorId_t motorId,double angle)
+void DriveDjMotor(CAN_HandleTypeDef* hcan,MotorId_t motorId,int16_t motorVoltage)
 {   
-	  
-	  if(angle>360) angle=360;
-	  if(angle<-360) angle=-360;
-	  
-    int16_t motorVoltage = (int16_t)(angle / 360.0 * 25000);  // 根据角度计算电压值 (-25000 ~ 25000)
+	   // 根据角度计算电压值 (-25000 ~ 25000)
 
     // 获取高 8 位和低 8 位
     uint8_t highByte = (motorVoltage >> 8) & 0xFF; // 右移 8 位并取高 8 位

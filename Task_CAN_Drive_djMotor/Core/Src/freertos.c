@@ -155,7 +155,7 @@ void StartTask02(void *argument)
 	
   for(;;)
   {
-			DriveDjMotor(&hcan1,1,100);
+			DriveDjMotor(&hcan1,1,25000);
 		  vTaskDelay(pdMS_TO_TICKS(1));
   }
   /* USER CODE END StartTask02 */

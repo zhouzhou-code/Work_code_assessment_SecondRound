@@ -17,6 +17,6 @@ typedef enum MotorId
 } MotorId_t;
 
 
-void DriveDjMotor(CAN_HandleTypeDef* hcan,MotorId_t motorId,double angle);
+void DriveDjMotor(CAN_HandleTypeDef* hcan,MotorId_t motorId,int16_t motorVoltage);
 
 #endif
